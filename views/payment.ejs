@@ -1,0 +1,23 @@
+<div style="
+   margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);"">
+    <form action="/register/success" method="POST">
+        <script 
+           src="https://checkout.razorpay.com/v1/checkout.js" 
+           data-key= "<%= key %>"  
+           data-amount="50000" 
+           data-currency="INR"   
+           data-order_id="<%= orderID %>"
+           data-buttontext="Pay with Razorpay"  
+           data-name="Acme Corp"  
+           data-description="Test transaction" 
+           data-image="https://example.com/your_logo.jpg"  
+           data-theme.color="#F37254">
+       </script>
+       <input type="hidden" custom="Hidden Element" name="hidden">
+   </form>
+</div>
