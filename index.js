@@ -20,7 +20,6 @@ db.on('error', error => {
 });
 db.once('open', () => console.log('connected to the user database'));
 
-
 // all middleware here
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -31,11 +30,14 @@ app.use(session({
 app.use(expressLayouts);
 app.set('view engine','ejs');
 app.use(express.urlencoded({extended: true}));
-app.use(express.static(path.join(__dirname + './assets')));
+app.use(express.static(path.join(__dirname + '/assets')));
 
 // all routes here
 app.use('/', require('./routes/home.js'));
 app.use('/register', require('./routes/register.js'));
+app.use('/teams', require('./routes/teams.js'));
 app.use('*', require('./routes/404.js'));
+
+//DATABASE_URL=mongodb+srv://mario2020:1234@cluster0-holb2.mongodb.net/test?retryWrites=true&w=majority
 
 app.listen(process.env.PORT || 3000,() => console.log('server started'));
