@@ -16,6 +16,9 @@ let showTab = (n) => {
     document.getElementById('skipBtn').style.display = 'none';
   } else {
     document.getElementById("prevBtn").style.display = "inline";
+  }
+
+  if( n == 2 ){
     document.getElementById("skipBtn").style.display = "inline";
   }
   if (n == (x.length - 1)) {
@@ -42,11 +45,31 @@ let  nextPrev = (n) => {
   // Increase or decrease the current tab by 1:
   currentTab = currentTab + n;
   // if you have reached the end of the form... :
-  if (currentTab >= x.length) {
-    //...the form gets submitted:
-    document.getElementById("regForm").submit();
-    return false;
-  }
+  // if (currentTab >= x.length) {
+  //   //...the form gets submitted:
+  //   document.getElementById("regForm").submit();
+  //   return false;
+  // }
+  // Otherwise, display the correct tab:
+  showTab(currentTab);
+}
+
+let  skip = (n) => {
+  // This function will figure out which tab to display
+  let x = document.getElementsByClassName("tab");
+ // let skip = document.getElementById('skipBtn');
+  // Exit the function if any field in the current tab is invalid:
+  // if (n == 2 && !validateForm()) return false;
+  // Hide the current tab:
+  x[currentTab].style.display = "none";
+  // Increase or decrease the current tab by 1:
+  currentTab = currentTab + n;
+  // if you have reached the end of the form... :
+  // if (currentTab >= x.length) {
+  //   //...the form gets submitted:
+  //   document.getElementById("regForm").submit();
+  //   return false;
+  // }
   // Otherwise, display the correct tab:
   showTab(currentTab);
 }

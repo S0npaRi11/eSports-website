@@ -38,7 +38,7 @@ router.post('/', (req,res) =>{
         }
         else{
             console.log(order);
-            res.render('../views/payment.ejs',{orderID: order.id, key: instance.key_id});
+            res.render('../views/payment.ejs',{orderID: order.id, key: instance.key_id,teamName: req.session.participant.teamName, player1: req.session.participant.player1, player2: req.session.participant.player2, player3: req.session.participant.player3, player4: req.session.participant.player4});
         }
     });
 });
