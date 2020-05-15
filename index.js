@@ -36,6 +36,8 @@ app.use(express.static(path.join(__dirname + '/assets')));
 app.use('/', require('./routes/home.js'));
 app.use('/register', require('./routes/register.js'));
 app.use('/teams', require('./routes/teams.js'));
+app.use('/rules', require('./routes/rules.js'));
+app.use('/standings', require('./routes/standings.js'));
 app.use('*', require('./routes/404.js'));
 
 //DATABASE_URL=mongodb+srv://mario2020:1234@cluster0-holb2.mongodb.net/test?retryWrites=true&w=majority
