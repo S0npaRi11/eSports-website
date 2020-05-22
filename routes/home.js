@@ -1,10 +1,15 @@
 const express = require('express');
-const path = require('path');
+const teams = require('../models/Participant');
 
 const router = express.Router();
 
 router.get('/', (req,res) => {
-    res.render('../views/index.ejs');
+   teams.find({}, (err,team) => {
+    if(err) console.log(err);
+    else{
+        res.render('../views/index.ejs', {total: team.length});
+    }
+   });
 });
 
 module.exports = router;

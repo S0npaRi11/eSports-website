@@ -4,7 +4,6 @@ if(process.env.NODE_ENV !== 'production'){
 
 const express = require('express');
 const Razorpay = require('razorpay');
-const path = require('path');
 const participants = require('../models/Participant');
 const crypto = require('crypto');
 
@@ -12,48 +11,48 @@ const router = express.Router();
 
 router.post('/', (req,res) =>{
    
-    console.log(req.body); 
-    if(process.env.NODE_ENV !== 'production'){
-        require('dotenv').config();
-    }
+    // console.log(req.body); 
+    // if(process.env.NODE_ENV !== 'production'){
+    //     require('dotenv').config();
+    // }
     req.session.participant = req.body;
 
     // console.log(req.session.particiant);
 
-    const instance = new Razorpay({
-        key_id: process.env.RAZORPAY_ID,
-        key_secret: process.env.RAZORPAY_SECRET
-    });
+    // const instance = new Razorpay({
+    //     key_id: process.env.RAZORPAY_ID,
+    //     key_secret: process.env.RAZORPAY_SECRET
+    // });
 
     // creating an order here
-    const options = {
-        amount: 50000,
-        currency: 'INR'
-    }
+    // const options = {
+    //     amount: 100,
+    //     currency: 'INR'
+    // }
 
-    instance.orders.create(options, (err,order) => {
-        if(err) {
-            console.log(err);
-            res.render('../views/500.ejs');
-        }
-        else{
-            // console.log(order);
-            res.render('../views/payment.ejs',{orderID: order.id, key: instance.key_id,teamName: req.session.participant.teamName, player1: req.session.participant.player1, player2: req.session.participant.player2, player3: req.session.participant.player3, player4: req.session.participant.player4});
-        }
-    });
+    // instance.orders.create(options, (err,order) => {
+    //     if(err) {
+    //         console.log(err);
+    //         res.render('../views/500.ejs');
+    //     }
+    //     else{
+    //         // console.log(order);
+    //         res.render('../views/payment.ejs',{orderID: order.id, key: instance.key_id,teamName: req.session.participant.teamName, player1: req.session.participant.player1, player2: req.session.participant.player2, player3: req.session.participant.player3, player4: req.session.participant.player4});
+    //     }
+    // });
 });
 
-router.post('/success', (req,res)=> {
+router.get('/success', (req,res)=> {
     // console.log(req.body);
-    let generatedSignature = crypto
-        .createHmac(
-            "SHA256",
-            process.env.RAZORPAY_SECRET
-        ).update(req.body.razorpay_order_id + '|' + req.body.razorpay_payment_id)
-        .digest('hex');
-    let isSignatureValid = generatedSignature == req.body.razorpay_signature;
+    // let generatedSignature = crypto
+    //     .createHmac(
+    //         "SHA256",
+    //         process.env.RAZORPAY_SECRET
+    //     ).update(req.body.razorpay_order_id + '|' + req.body.razorpay_payment_id)
+    //     .digest('hex');
+    // let isSignatureValid = generatedSignature == req.body.razorpay_signature;
 
-    if(isSignatureValid){
+    // if(isSignatureValid){
         const newParticipant = new participants({
             teamName: req.session.participant.teamName,
             Player1: req.session.participant.player1,
@@ -73,7 +72,7 @@ router.post('/success', (req,res)=> {
         }).catch(() => {
             res.render('../views/500.ejs');
         });
-    }
+    // }
 });
 
 module.exports = router;
