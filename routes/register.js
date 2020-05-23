@@ -17,6 +17,8 @@ router.post('/', (req,res) =>{
     // }
     req.session.participant = req.body;
 
+    console.log(req.session.participant);
+
     // console.log(req.session.particiant);
 
     // const instance = new Razorpay({
