@@ -15,6 +15,10 @@ $('document').ready(() => {
       $('#teamName').addClass('invalid');
       $('#nextBtn').hide();
       $('#message').append('Team name already exists');
+    }else{
+      $('#teamName').removeClass('invalid');
+      $('#nextBtn').show();
+      $('#message').html('');
     }
   });
 });
