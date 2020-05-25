@@ -78,7 +78,7 @@ router.get('/success', (req,res)=> {
             <li> Payment: Successful </li>
         </ul>
         <p> 
-            Please read the rules for the tournament. <a href="https://www.monthly-tournament.herokuapp.com/rules"> Click here </a> to read the rules. <br />
+            Please read the rules for the tournament. <a href="https://monthly-tournament.herokuapp.com/rules"> Click here </a> to read the rules. <br />
             <b>  All the further details reguarding the tournamet will be provided via email </b>
         </p>
         `;
