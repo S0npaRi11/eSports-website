@@ -75,8 +75,7 @@ router.get('/success', (req,res)=> {
             <li>Player 2 Name: ${req.session.participant.player2}  </li>
             <li>Player 3 Name: ${req.session.participant.player3}  </li>
             <li>Player 4 Name: ${req.session.participant.player4}  </li>
-            <li>  <hr />  </li>
-            <li> Payment: Successfull </li>
+            <li> Payment: Successful </li>
         </ul>
         <p> 
             Please read the rules for the tournament. <a href="https://www.monthly-tournament.herokuapp.com/rules"> Click here </a> to read the rules. <br />
@@ -89,7 +88,7 @@ router.get('/success', (req,res)=> {
             const mailOptions = {
                 from: process.env.EMAIL_SEND,  // sender's email
                 to: em, // receiver's email
-                subject: 'Purchase Receipt',
+                subject: 'Registration Successful - Monthly tournament PUBG june 2020',
                 html:   template// template gose here
             }
             // send the registration email form here
