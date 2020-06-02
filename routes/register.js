@@ -4,11 +4,9 @@ if(process.env.NODE_ENV !== 'production'){
 
 const express = require('express');
 const participants = require('../models/Participant');
-const email = require('./emailConfig');
+const nodeMailer = require('nodemailer');
 
 const router = express.Router();
-
-const nodeMailer = require('nodemailer');
 
 const transporter = nodeMailer.createTransport({
     service: 'gmail',
@@ -29,7 +27,26 @@ router.post('/', (req,res) =>{
 });
 
 router.get('/success', (req,res)=> {
+    
+    let totalParticipants;
+    let lb;
+    
+    participants.find({}, (err,teams) => {
+       totalParticipants = teams.length; 
+    });
    
+    
+    if(totalParticipants > 0 && totalParticipants < 26){
+        lb = 1
+    }
+    
+    if(totalParticipants > 25 && totalParticipants < 51){
+        lb = 2
+    }
+    
+    if(totalParticipants > 50 && totalParticipants < 76){
+        lb = 3
+    }
     const newParticipant = new participants({
         teamName: req.session.participant.teamName,
         Player1: req.session.participant.player1,
@@ -41,7 +58,8 @@ router.get('/success', (req,res)=> {
         Player4: req.session.participant.player4,
         Player4Email:req.session.participant.player4Email, 
         orderId: req.body.razorpay_order_id,
-        paymentId: req.body.razorpay_payment_id
+        paymentId: req.body.razorpay_payment_id,
+        lobby: lb
     });
 
     newParticipant.save().then(() => {
