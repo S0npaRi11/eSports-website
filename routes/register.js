@@ -23,30 +23,31 @@ const transporter = nodeMailer.createTransport({
 
 router.post('/', (req,res) =>{
     req.session.participant = req.body;
-    res.redirect('https://rzp.io/l/Kf1NWjz');
+    // res.redirect('https://rzp.io/l/Kf1NWjz');
+    res.redirect('/register/success');
 });
 
 router.get('/success', (req,res)=> {
     
-    let totalParticipants;
-    let lb;
+    // let totalParticipants;
+    // let lb;
     
-    participants.find({}, (err,teams) => {
-       totalParticipants = teams.length; 
-    });
+    // participants.find({}, (err,teams) => {
+    //    totalParticipants = teams.length; 
+    // });
    
     
-    if(totalParticipants > 0 && totalParticipants < 26){
-        lb = 1
-    }
+    // if(totalParticipants > 0 && totalParticipants < 26){
+    //     lb = 1
+    // }
     
-    if(totalParticipants > 25 && totalParticipants < 51){
-        lb = 2
-    }
+    // if(totalParticipants > 25 && totalParticipants < 51){
+    //     lb = 2
+    // }
     
-    if(totalParticipants > 50 && totalParticipants < 76){
-        lb = 3
-    }
+    // if(totalParticipants > 50 && totalParticipants < 76){
+    //     lb = 3
+    // }
     const newParticipant = new participants({
         teamName: req.session.participant.teamName,
         Player1: req.session.participant.player1,
@@ -59,7 +60,7 @@ router.get('/success', (req,res)=> {
         Player4Email:req.session.participant.player4Email, 
         orderId: req.body.razorpay_order_id,
         paymentId: req.body.razorpay_payment_id,
-        lobby: lb
+        lobby: 1
     });
 
     newParticipant.save().then(() => {
@@ -85,7 +86,7 @@ router.get('/success', (req,res)=> {
         // build the template here
         let template = `
         <h2>  You have been successfully registered for </h2>
-        <h1> Monthly Tournament PUBG JUNE 2020 </h1>
+        <h1> Monthly Tournament PUBG JULY 2020 </h1>
         <b> Details: </b>
         <ul>  
             <li>Squad Name: ${req.session.participant.teamName}  </li>
@@ -106,7 +107,7 @@ router.get('/success', (req,res)=> {
             const mailOptions = {
                 from: process.env.EMAIL_SEND,  // sender's email
                 to: em, // receiver's email
-                subject: 'Registration Successful - Monthly tournament PUBG june 2020',
+                subject: 'Registration Successful - Monthly tournament PUBG JULY 2020',
                 html:   template// template gose here
             }
             // send the registration email form here

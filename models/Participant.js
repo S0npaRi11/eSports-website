@@ -47,6 +47,14 @@ const participantsSchema = mongoose.Schema({
     },
     paymentId:{
         type: String,
+    },
+    lobbyNo:{
+        type: Number,
+        default: 1
+    },
+    standing:{
+        type: Number,
+        default: 0
     }
 });
 
